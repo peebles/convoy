@@ -27,3 +27,5 @@ _testmain.go
 *.prof
 
 longhorn/template.go
+.DS_Store
+.dapper

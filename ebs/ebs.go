@@ -363,6 +363,7 @@ func (d *Driver) CreateVolume(req Request) error {
 			VolumeType: volumeType,
 			IOPS:       iops,
 			Tags:       newTags,
+			KmsKeyID:   d.DefaultKmsKeyID,
 		}
 		volumeID, err = d.ebsService.CreateVolume(r)
 		if err != nil {
