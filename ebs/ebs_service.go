@@ -182,9 +182,12 @@ func (s *ebsService) CreateVolume(request *CreateEBSVolumeRequest) (string, erro
 
 	if snapshotID != "" {
 		params.SnapshotId = aws.String(snapshotID)
-	}
-
-	if kmsKeyID != "" {
+		if kmsKeyID != "" {
+			// AWS Error:  InvalidParameterCombination Cannot use encryption key ID when creating volume from encrypted snapshot.
+			// params.KmsKeyId = aws.String(kmsKeyID)
+			params.Encrypted = aws.Bool(true)
+		}
+	} else if kmsKeyID != "" {
 		params.KmsKeyId = aws.String(kmsKeyID)
 		params.Encrypted = aws.Bool(true)
 	}
