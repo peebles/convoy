@@ -182,7 +182,9 @@ func (s *ebsService) CreateVolume(request *CreateEBSVolumeRequest) (string, erro
 
 	if snapshotID != "" {
 		params.SnapshotId = aws.String(snapshotID)
-	} else if kmsKeyID != "" {
+	}
+
+	if kmsKeyID != "" {
 		params.KmsKeyId = aws.String(kmsKeyID)
 		params.Encrypted = aws.Bool(true)
 	}
